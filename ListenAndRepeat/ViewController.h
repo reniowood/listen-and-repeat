@@ -8,8 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
+#import <AVFoundation/AVFoundation.h>
 
+@interface ViewController : NSViewController <AVAudioPlayerDelegate>
+
+@property (nonatomic, retain) IBOutlet NSButton *playButton;
+@property (nonatomic) BOOL isPlaying;
+
+@property (nonatomic, retain) AVAudioPlayer *player;
+
+- (IBAction)playSound:(NSButton*) sender;
 
 @end
 
