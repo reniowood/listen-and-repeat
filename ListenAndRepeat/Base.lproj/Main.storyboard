@@ -724,7 +724,7 @@
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a8T-in-hWB">
                                 <rect key="frame" x="33" y="198" width="414" height="20"/>
                                 <animations/>
-                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="HzI-DO-VT4"/>
+                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="HzI-DO-VT4"/>
                             </slider>
                             <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgc-8f-BZw">
                                 <rect key="frame" x="426" y="56" width="21" height="96"/>
@@ -777,6 +777,13 @@
                         </subviews>
                         <animations/>
                     </view>
+                    <connections>
+                        <outlet property="currentTime" destination="Klk-ru-pOB" id="IxF-hW-ZmY"/>
+                        <outlet property="duration" destination="rRj-L8-mlY" id="hy5-Cd-KEv"/>
+                        <outlet property="fileName" destination="KhJ-6R-BdS" id="Ae6-G1-1it"/>
+                        <outlet property="playButton" destination="rNl-QR-XmN" id="XE1-ID-QTm"/>
+                        <outlet property="timeSlider" destination="a8T-in-hWB" id="fLp-S5-a25"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

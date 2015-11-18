@@ -10,26 +10,32 @@
 
 @implementation ViewController
 
-@synthesize playButton;
-@synthesize isPlaying;
 @synthesize player;
+@synthesize timer;
+
+@synthesize fileName;
+@synthesize currentTime;
+@synthesize duration;
+@synthesize timeSlider;
+
+@synthesize playButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    [self setPlayButton:nil];
+    [self setTimer:nil];
     
     NSOpenPanel *openFileDialog = [NSOpenPanel openPanel];
     
     [openFileDialog setCanChooseFiles:YES];
     [openFileDialog setAllowsMultipleSelection:NO];
     
-    if ( [openFileDialog runModal] == NSModalResponseOK) {
-        NSArray *paths = [openFileDialog URLs];
+    if ([openFileDialog runModal] == NSModalResponseOK) {
+        NSURL *path = [[openFileDialog URLs] objectAtIndex:0];
         
         NSError *error;
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:[paths objectAtIndex:0] error:&error];
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:path error:&error];
         
         if (error) {
             NSLog(@"%@", [error localizedDescription]);
@@ -37,7 +43,16 @@
             [player prepareToPlay];
         }
         
+        [timeSlider setMinValue:0.0];
+        [timeSlider setMaxValue:[player duration]];
+    
         [player setDelegate:self];
+        
+        [fileName setStringValue:[[path path] lastPathComponent]];
+        
+        [currentTime setStringValue:[self getFormattedTime:0]];
+        [duration setStringValue:[self getFormattedTime:[player duration]]];
+        [timeSlider setDoubleValue:0];
     }
 }
 
@@ -47,18 +62,32 @@
     // Update the view, if already loaded.
 }
 
-- (IBAction)playSound:(NSButton *)sender {
-    if ([self isPlaying] == YES) {
+- (IBAction)playSound:(NSButton *) sender {
+    if ([player isPlaying] == YES) {
+        [timer invalidate];
+        [self setTimer:nil];
+        
         [player stop];
         
-        [self setIsPlaying:NO];
         [sender setTitle:@"Play"];
     } else {
+        [self setTimer:[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateSlider:) userInfo:player repeats:YES]];
+        
         [player play];
         
-        [self setIsPlaying:YES];
         [sender setTitle:@"Stop"];
     }
+}
+
+- (void)updateSlider:(NSTimer*) targetTimer {
+    if (player == [timer userInfo] && [player isPlaying]) {
+        [timeSlider setDoubleValue:[player currentTime]];
+        [currentTime setStringValue:[self getFormattedTime:[player currentTime]]];
+    }
+}
+
+- (NSString*)getFormattedTime:(int) seconds {
+    return [NSString stringWithFormat:@"%02d:%02d:%02d", seconds / 3600, (seconds / 60) % 60, seconds % 60];
 }
 
 @end
