@@ -87,6 +87,22 @@
     }
 }
 
+- (IBAction)playBackwardOneSec:(NSButton *)sender {
+    [self playAt: -1.0];
+}
+
+- (IBAction)playBackwardThreeSec:(NSButton *)sender {
+    [self playAt: -3.0];
+}
+
+- (IBAction)playForwardOneSec:(NSButton *)sender {
+    [self playAt: 1.0];
+}
+
+- (IBAction)playForwardThreeSec:(NSButton *)sender {
+    [self playAt: 3.0];
+}
+
 - (void)updateSlider:(NSTimer*) targetTimer {
     if (player == [timer userInfo] && [player isPlaying]) {
         [timeSlider setDoubleValue:[player currentTime]];
@@ -96,6 +112,14 @@
 
 - (NSString*)getFormattedTime:(int) seconds {
     return [NSString stringWithFormat:@"%02d:%02d:%02d", seconds / 3600, (seconds / 60) % 60, seconds % 60];
+}
+
+@end
+
+@implementation ViewController (Private)
+
+- (void) playAt:(NSTimeInterval) offset {
+    [player setCurrentTime:([player currentTime] + offset)];
 }
 
 @end

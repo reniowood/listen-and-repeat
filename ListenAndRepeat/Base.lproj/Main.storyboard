@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
@@ -688,6 +688,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="playBackwardOneSec:" target="XfG-lQ-9wD" id="npW-K5-zGd"/>
+                                </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5VV-5L-rsW">
                                 <rect key="frame" x="113" y="28" width="42" height="42"/>
@@ -696,14 +699,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kBN-OZ-bgb">
-                                <rect key="frame" x="284" y="28" width="42" height="42"/>
-                                <animations/>
-                                <buttonCell key="cell" type="square" title="+ 1 sec" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="j4x-WU-xKV">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
+                                <connections>
+                                    <action selector="playBackwardThreeSec:" target="XfG-lQ-9wD" id="0cS-Iy-Vd5"/>
+                                </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jMl-a4-LoA">
                                 <rect key="frame" x="325" y="28" width="42" height="42"/>
@@ -712,6 +710,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="playForwardThreeSec:" target="XfG-lQ-9wD" id="w0s-Jp-icl"/>
+                                </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="09C-Ki-qFW">
                                 <rect key="frame" x="284" y="69" width="70" height="70"/>
@@ -727,12 +728,12 @@
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="HzI-DO-VT4"/>
                             </slider>
                             <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgc-8f-BZw">
-                                <rect key="frame" x="426" y="56" width="21" height="96"/>
+                                <rect key="frame" x="426" y="56" width="20" height="96"/>
                                 <animations/>
                                 <sliderCell key="cell" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="HNo-2N-Acm"/>
                             </slider>
                             <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Db8-Vc-naj">
-                                <rect key="frame" x="33" y="56" width="21" height="96"/>
+                                <rect key="frame" x="33" y="56" width="20" height="96"/>
                                 <animations/>
                                 <sliderCell key="cell" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="j3L-gR-A3s"/>
                             </slider>
@@ -774,6 +775,17 @@
                                     <action selector="playSound:" target="XfG-lQ-9wD" id="fwG-Rd-VuR"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kBN-OZ-bgb">
+                                <rect key="frame" x="284" y="28" width="42" height="42"/>
+                                <animations/>
+                                <buttonCell key="cell" type="square" title="+ 1 sec" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="j4x-WU-xKV">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="playForwardOneSec:" target="XfG-lQ-9wD" id="JXb-gz-K2m"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                     </view>
@@ -781,7 +793,11 @@
                         <outlet property="currentTime" destination="Klk-ru-pOB" id="IxF-hW-ZmY"/>
                         <outlet property="duration" destination="rRj-L8-mlY" id="hy5-Cd-KEv"/>
                         <outlet property="fileName" destination="KhJ-6R-BdS" id="Ae6-G1-1it"/>
+                        <outlet property="playBackwardOneSecButton" destination="Mh3-C4-h38" id="ARV-M7-fU8"/>
+                        <outlet property="playBackwardThreeSecButton" destination="5VV-5L-rsW" id="mAU-EH-v5P"/>
                         <outlet property="playButton" destination="rNl-QR-XmN" id="XE1-ID-QTm"/>
+                        <outlet property="playForwardOneSecButton" destination="kBN-OZ-bgb" id="o2Z-KG-MvX"/>
+                        <outlet property="playForwardThreeSecButton" destination="jMl-a4-LoA" id="A7w-dj-GgP"/>
                         <outlet property="timeSlider" destination="a8T-in-hWB" id="fLp-S5-a25"/>
                     </connections>
                 </viewController>
