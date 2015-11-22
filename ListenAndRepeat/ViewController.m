@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "HotKey.h"
 
 @implementation ViewController
 
@@ -24,36 +25,43 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
+    HotKey *hotKeyHandler = [[HotKey alloc] init];
+    
     [self setTimer:nil];
+    [self setPlayButton:[self.view viewWithTag:1]];
     
     NSOpenPanel *openFileDialog = [NSOpenPanel openPanel];
     
     [openFileDialog setCanChooseFiles:YES];
     [openFileDialog setAllowsMultipleSelection:NO];
     
-    if ([openFileDialog runModal] == NSModalResponseOK) {
-        NSURL *path = [[openFileDialog URLs] objectAtIndex:0];
-        
-        NSError *error;
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:path error:&error];
-        
-        if (error) {
-            NSLog(@"%@", [error localizedDescription]);
-        } else {
-            [player prepareToPlay];
-        }
-        
-        [timeSlider setMinValue:0.0];
-        [timeSlider setMaxValue:[player duration]];
-    
-        [player setDelegate:self];
-        
-        [fileName setStringValue:[[path path] lastPathComponent]];
-        
-        [currentTime setStringValue:[self getFormattedTime:0]];
-        [duration setStringValue:[self getFormattedTime:[player duration]]];
-        [timeSlider setDoubleValue:0];
+    if ([openFileDialog runModal] != NSModalResponseOK) {
+        return;
     }
+    
+    [hotKeyHandler setupHotKeys: self];
+    
+    NSURL *path = [[openFileDialog URLs] objectAtIndex:0];
+    
+    NSError *error;
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:path error:&error];
+    
+    if (error) {
+        NSLog(@"%@", [error localizedDescription]);
+    } else {
+        [player prepareToPlay];
+    }
+    
+    [timeSlider setMinValue:0.0];
+    [timeSlider setMaxValue:[player duration]];
+
+    [player setDelegate:self];
+    
+    [fileName setStringValue:[[path path] lastPathComponent]];
+    
+    [currentTime setStringValue:[self getFormattedTime:0]];
+    [duration setStringValue:[self getFormattedTime:[player duration]]];
+    [timeSlider setDoubleValue:0];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -69,13 +77,13 @@
         
         [player stop];
         
-        [sender setTitle:@"Play"];
+        [playButton setTitle:@"Play"];
     } else {
         [self setTimer:[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateSlider:) userInfo:player repeats:YES]];
         
         [player play];
         
-        [sender setTitle:@"Stop"];
+        [playButton setTitle:@"Stop"];
     }
 }
 

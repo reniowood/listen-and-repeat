@@ -14,6 +14,7 @@
 		942DBE2C1BF8CA3D00670537 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942DBE2A1BF8CA3D00670537 /* Main.storyboard */; };
 		942DBE371BF8CA3D00670537 /* ListenAndRepeatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE361BF8CA3D00670537 /* ListenAndRepeatTests.m */; };
 		942DBE421BF8CA3D00670537 /* ListenAndRepeatUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE411BF8CA3D00670537 /* ListenAndRepeatUITests.m */; };
+		94678A621C00D4BF008F1E3B /* HotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 94678A611C00D4BF008F1E3B /* HotKey.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		942DBE3D1BF8CA3D00670537 /* ListenAndRepeatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListenAndRepeatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		942DBE411BF8CA3D00670537 /* ListenAndRepeatUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListenAndRepeatUITests.m; sourceTree = "<group>"; };
 		942DBE431BF8CA3D00670537 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94678A611C00D4BF008F1E3B /* HotKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotKey.m; sourceTree = "<group>"; };
+		94678A631C00D4D5008F1E3B /* HotKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotKey.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				942DBE201BF8CA3D00670537 /* AppDelegate.m */,
 				942DBE251BF8CA3D00670537 /* ViewController.h */,
 				942DBE261BF8CA3D00670537 /* ViewController.m */,
+				94678A631C00D4D5008F1E3B /* HotKey.h */,
+				94678A611C00D4BF008F1E3B /* HotKey.m */,
 				942DBE281BF8CA3D00670537 /* Assets.xcassets */,
 				942DBE2A1BF8CA3D00670537 /* Main.storyboard */,
 				942DBE2D1BF8CA3D00670537 /* Info.plist */,
@@ -199,6 +204,9 @@
 		942DBE141BF8CA3D00670537 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					buttonPlay,
+				);
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Jinhyuk Kim";
 				TargetAttributes = {
@@ -269,6 +277,7 @@
 				942DBE271BF8CA3D00670537 /* ViewController.m in Sources */,
 				942DBE241BF8CA3D00670537 /* main.m in Sources */,
 				942DBE211BF8CA3D00670537 /* AppDelegate.m in Sources */,
+				94678A621C00D4BF008F1E3B /* HotKey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +410,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ListenAndRepeat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinhyuk.ListenAndRepeat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -413,6 +423,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ListenAndRepeat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinhyuk.ListenAndRepeat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -489,6 +500,7 @@
 				942DBE481BF8CA3D00670537 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		942DBE491BF8CA3D00670537 /* Build configuration list for PBXNativeTarget "ListenAndRepeatTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +509,7 @@
 				942DBE4B1BF8CA3D00670537 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		942DBE4C1BF8CA3D00670537 /* Build configuration list for PBXNativeTarget "ListenAndRepeatUITests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +518,7 @@
 				942DBE4E1BF8CA3D00670537 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
