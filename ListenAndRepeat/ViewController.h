@@ -32,10 +32,7 @@
 - (IBAction)playBackwardThreeSec:(NSButton *)sender;
 - (IBAction)playForwardOneSec:(NSButton *)sender;
 - (IBAction)playForwardThreeSec:(NSButton *)sender;
-
-- (void)updateSlider:(NSTimer*) timer;
-
-- (NSString*)getFormattedTime:(int) seconds;
+- (IBAction)setSlider:(NSSlider *)sender;
 
 @end
 
@@ -48,7 +45,10 @@
 - (void) initFileName;
 
 - (void) playAt: (NSTimeInterval) offset;
+- (void) updateSlider:(NSTimer*) targetTimer;
 - (void) updateTime: (NSTimeInterval) time;
+
+- (NSString*) getFormattedTime:(int) seconds;
 
 @end
 

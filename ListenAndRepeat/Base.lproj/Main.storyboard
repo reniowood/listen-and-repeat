@@ -211,7 +211,11 @@
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a8T-in-hWB">
                                 <rect key="frame" x="33" y="149" width="414" height="21"/>
                                 <animations/>
-                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="HzI-DO-VT4"/>
+                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="HzI-DO-VT4">
+                                    <connections>
+                                        <action selector="setSlider:" target="XfG-lQ-9wD" id="Yk3-9g-TXT"/>
+                                    </connections>
+                                </sliderCell>
                             </slider>
                             <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgc-8f-BZw">
                                 <rect key="frame" x="427" y="17" width="21" height="96"/>

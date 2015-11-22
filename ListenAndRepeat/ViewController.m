@@ -29,6 +29,8 @@
     // Do any additional setup after loading the view.
     
     [self setPlayer:[[Player alloc] init]];
+    [player setDelegate:self];
+    
     [self initHotKeys];
     
     [self setTimer:nil];
@@ -42,12 +44,21 @@
     // Update the view, if already loaded.
 }
 
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    [timer invalidate];
+    [self setTimer:nil];
+    
+    [playButton setTitle:@"Play"];
+    
+    [self updateTime: 0.0];
+}
+
 - (IBAction)playSound:(NSButton *) sender {
     if ([player isPlaying] == YES) {
         [timer invalidate];
         [self setTimer:nil];
         
-        [player stop];
+        [player pause];
         
         [playButton setTitle:@"Play"];
     } else {
@@ -75,14 +86,11 @@
     [self playAt: 3.0];
 }
 
-- (void)updateSlider:(NSTimer*) targetTimer {
-    if (player == [timer userInfo] && [player isPlaying]) {
-        [self updateTime: [player currentTime]];
-    }
-}
-
-- (NSString*)getFormattedTime:(int) seconds {
-    return [NSString stringWithFormat:@"%02d:%02d:%02d", seconds / 3600, (seconds / 60) % 60, seconds % 60];
+- (IBAction)setSlider:(NSSlider *)sender {
+    double sliderValue = [sender doubleValue];
+    
+    [player setCurrentTime:sliderValue];
+    [currentTime setStringValue:[self getFormattedTime:sliderValue]];
 }
 
 @end
@@ -115,15 +123,25 @@
     [fileName setStringValue:[[player url] lastPathComponent]];
 }
 
+- (void) playAt:(NSTimeInterval) offset {
+    [player setCurrentTime:([player currentTime] + offset)];
+    
+    [self updateTime: [player currentTime]];
+}
+
+- (void)updateSlider:(NSTimer*) targetTimer {
+    if (player == [timer userInfo] && [player isPlaying]) {
+        [self updateTime: [player currentTime]];
+    }
+}
+
 - (void) updateTime: (NSTimeInterval) time {
     [timeSlider setDoubleValue:time];
     [currentTime setStringValue:[self getFormattedTime:time]];
 }
 
-- (void) playAt:(NSTimeInterval) offset {
-    [player setCurrentTime:([player currentTime] + offset)];
-    
-    [self updateTime: [player currentTime]];
+- (NSString*) getFormattedTime:(int) seconds {
+    return [NSString stringWithFormat:@"%02d:%02d:%02d", seconds / 3600, (seconds / 60) % 60, seconds % 60];
 }
 
 @end
