@@ -25,23 +25,22 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    HotKey *hotKeyHandler = [[HotKey alloc] init];
+    [self initHotKeys];
     
     [self setTimer:nil];
-    [self setPlayButton:[self.view viewWithTag:1]];
     
-    NSOpenPanel *openFileDialog = [NSOpenPanel openPanel];
-    
-    [openFileDialog setCanChooseFiles:YES];
-    [openFileDialog setAllowsMultipleSelection:NO];
-    
-    if ([openFileDialog runModal] != NSModalResponseOK) {
-        return;
-    }
-    
-    [hotKeyHandler setupHotKeys: self];
-    
-    NSURL *path = [[openFileDialog URLs] objectAtIndex:0];
+    [self initPlayer];
+    [self initView];
+}
+
+- (void)setRepresentedObject:(id)representedObject {
+    [super setRepresentedObject:representedObject];
+
+    // Update the view, if already loaded.
+}
+
+- (void) initPlayer {
+    NSURL *path = [self openFile];
     
     NSError *error;
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:path error:&error];
@@ -52,22 +51,21 @@
         [player prepareToPlay];
     }
     
-    [timeSlider setMinValue:0.0];
-    [timeSlider setMaxValue:[player duration]];
-
     [player setDelegate:self];
-    
-    [fileName setStringValue:[[path path] lastPathComponent]];
-    
-    [currentTime setStringValue:[self getFormattedTime:0]];
-    [duration setStringValue:[self getFormattedTime:[player duration]]];
-    [timeSlider setDoubleValue:0];
 }
 
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
+- (NSURL *) openFile {
+    NSOpenPanel *openFileDialog = [NSOpenPanel openPanel];
+    
+    [openFileDialog setFloatingPanel:YES];
+    [openFileDialog setCanChooseFiles:YES];
+    [openFileDialog setAllowsMultipleSelection:NO];
+    
+    if ([openFileDialog runModal] != NSModalResponseOK) {
+        return nil;
+    }
+    
+    return [[openFileDialog URLs] objectAtIndex:0];
 }
 
 - (IBAction)playSound:(NSButton *) sender {
@@ -105,8 +103,7 @@
 
 - (void)updateSlider:(NSTimer*) targetTimer {
     if (player == [timer userInfo] && [player isPlaying]) {
-        [timeSlider setDoubleValue:[player currentTime]];
-        [currentTime setStringValue:[self getFormattedTime:[player currentTime]]];
+        [self updateTime: [player currentTime]];
     }
 }
 
@@ -118,8 +115,41 @@
 
 @implementation ViewController (Private)
 
+- (void) initHotKeys {
+    HotKey *hotKeyHandler = [[HotKey alloc] init];
+    [hotKeyHandler setupHotKeys: self];
+}
+
+- (void) initView {
+    [self initFileName];
+    [self initSlider];
+    [self initTimeText];
+}
+
+- (void) initSlider {
+    [timeSlider setMinValue:0.0];
+    [timeSlider setMaxValue:[player duration]];
+    [timeSlider setDoubleValue:0];
+}
+
+- (void) initTimeText {
+    [currentTime setStringValue:[self getFormattedTime:0]];
+    [duration setStringValue:[self getFormattedTime:[player duration]]];
+}
+
+- (void) initFileName {
+    [fileName setStringValue:[[player url] lastPathComponent]];
+}
+
+- (void) updateTime: (NSTimeInterval) time {
+    [timeSlider setDoubleValue:time];
+    [currentTime setStringValue:[self getFormattedTime:time]];
+}
+
 - (void) playAt:(NSTimeInterval) offset {
     [player setCurrentTime:([player currentTime] + offset)];
+    
+    [self updateTime: [player currentTime]];
 }
 
 @end

@@ -26,6 +26,9 @@
 @property (weak) IBOutlet NSButton *playForwardOneSecButton;
 @property (weak) IBOutlet NSButton *playForwardThreeSecButton;
 
+- (void) initPlayer;
+- (NSURL *) openFile;
+
 - (IBAction)playSound:(NSButton*) sender;
 - (IBAction)playBackwardOneSec:(NSButton *)sender;
 - (IBAction)playBackwardThreeSec:(NSButton *)sender;
@@ -40,7 +43,14 @@
 
 @interface ViewController (Private)
 
+- (void) initHotKeys;
+- (void) initView;
+- (void) initSlider;
+- (void) initTimeText;
+- (void) initFileName;
+
 - (void) playAt: (NSTimeInterval) offset;
+- (void) updateTime: (NSTimeInterval) time;
 
 @end
 
