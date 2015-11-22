@@ -57,12 +57,20 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef eventRef, void 
             
             break;
         case 2:
+            [viewController playBackwardOneSec:nil];
+            
             break;
         case 3:
+            [viewController playBackwardThreeSec:nil];
+            
             break;
         case 4:
+            [viewController playForwardOneSec:nil];
+            
             break;
         case 5:
+            [viewController playForwardThreeSec:nil];
+            
             break;
         default:
             break;
