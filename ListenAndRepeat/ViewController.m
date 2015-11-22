@@ -27,7 +27,8 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillClose:) name:NSWindowWillCloseNotification object:self.view.window];
+
     [self setPlayer:[[Player alloc] init]];
     [player setDelegate:self];
     
@@ -42,6 +43,11 @@
     [super setRepresentedObject:representedObject];
 
     // Update the view, if already loaded.
+}
+
+- (void) windowWillClose:(NSNotification *) notification {
+    [player stop];
+    [timer invalidate];
 }
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
