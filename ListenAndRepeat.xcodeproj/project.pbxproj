@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E76D0061C01AC2E007D8265 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76D0051C01AC2E007D8265 /* Player.m */; };
 		942DBE211BF8CA3D00670537 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE201BF8CA3D00670537 /* AppDelegate.m */; };
 		942DBE241BF8CA3D00670537 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE231BF8CA3D00670537 /* main.m */; };
 		942DBE271BF8CA3D00670537 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE261BF8CA3D00670537 /* ViewController.m */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E76D0041C01AC2E007D8265 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		1E76D0051C01AC2E007D8265 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		942DBE1C1BF8CA3D00670537 /* ListenAndRepeat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListenAndRepeat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		942DBE1F1BF8CA3D00670537 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		942DBE201BF8CA3D00670537 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				942DBE261BF8CA3D00670537 /* ViewController.m */,
 				94678A631C00D4D5008F1E3B /* HotKey.h */,
 				94678A611C00D4BF008F1E3B /* HotKey.m */,
+				1E76D0041C01AC2E007D8265 /* Player.h */,
+				1E76D0051C01AC2E007D8265 /* Player.m */,
 				942DBE281BF8CA3D00670537 /* Assets.xcassets */,
 				942DBE2A1BF8CA3D00670537 /* Main.storyboard */,
 				942DBE2D1BF8CA3D00670537 /* Info.plist */,
@@ -278,6 +283,7 @@
 				942DBE241BF8CA3D00670537 /* main.m in Sources */,
 				942DBE211BF8CA3D00670537 /* AppDelegate.m in Sources */,
 				94678A621C00D4BF008F1E3B /* HotKey.m in Sources */,
+				1E76D0061C01AC2E007D8265 /* Player.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

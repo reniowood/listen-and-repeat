@@ -7,7 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 #import "HotKey.h"
+#import "Player.h"
 
 @implementation ViewController
 
@@ -25,11 +27,12 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
+    
+    [self setPlayer:[[Player alloc] init]];
     [self initHotKeys];
     
     [self setTimer:nil];
     
-    [self initPlayer];
     [self initView];
 }
 
@@ -37,35 +40,6 @@
     [super setRepresentedObject:representedObject];
 
     // Update the view, if already loaded.
-}
-
-- (void) initPlayer {
-    NSURL *path = [self openFile];
-    
-    NSError *error;
-    player = [[AVAudioPlayer alloc] initWithContentsOfURL:path error:&error];
-    
-    if (error) {
-        NSLog(@"%@", [error localizedDescription]);
-    } else {
-        [player prepareToPlay];
-    }
-    
-    [player setDelegate:self];
-}
-
-- (NSURL *) openFile {
-    NSOpenPanel *openFileDialog = [NSOpenPanel openPanel];
-    
-    [openFileDialog setFloatingPanel:YES];
-    [openFileDialog setCanChooseFiles:YES];
-    [openFileDialog setAllowsMultipleSelection:NO];
-    
-    if ([openFileDialog runModal] != NSModalResponseOK) {
-        return nil;
-    }
-    
-    return [[openFileDialog URLs] objectAtIndex:0];
 }
 
 - (IBAction)playSound:(NSButton *) sender {
