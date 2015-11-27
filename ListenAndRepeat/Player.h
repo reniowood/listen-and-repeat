@@ -11,4 +11,6 @@
 
 @interface Player : AVAudioPlayer
 
++ (Player *) getInstance;
+
 @end

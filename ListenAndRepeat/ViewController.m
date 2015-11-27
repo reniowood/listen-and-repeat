@@ -13,7 +13,6 @@
 
 @implementation ViewController
 
-@synthesize player;
 @synthesize timer;
 
 @synthesize fileName;
@@ -29,7 +28,7 @@
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillClose:) name:NSWindowWillCloseNotification object:self.view.window];
 
-    [self setPlayer:[[Player alloc] init]];
+    Player *player = [Player getInstance];
     [player setDelegate:self];
     
     [self initHotKeys];
@@ -46,6 +45,8 @@
 }
 
 - (void) windowWillClose:(NSNotification *) notification {
+    Player *player = [Player getInstance];
+
     [player stop];
     [timer invalidate];
 }
@@ -60,6 +61,8 @@
 }
 
 - (IBAction)playSound:(NSButton *) sender {
+    Player *player = [Player getInstance];
+
     if ([player isPlaying] == YES) {
         [timer invalidate];
         [self setTimer:nil];
@@ -93,6 +96,7 @@
 }
 
 - (IBAction)setSlider:(NSSlider *)sender {
+    Player *player = [Player getInstance];
     double sliderValue = [sender doubleValue];
     
     [player setCurrentTime:sliderValue];
@@ -115,27 +119,37 @@
 }
 
 - (void) initSlider {
+    Player *player = [Player getInstance];
+
     [timeSlider setMinValue:0.0];
     [timeSlider setMaxValue:[player duration]];
     [timeSlider setDoubleValue:0];
 }
 
 - (void) initTimeText {
+    Player *player = [Player getInstance];
+
     [currentTime setStringValue:[self getFormattedTime:0]];
     [duration setStringValue:[self getFormattedTime:[player duration]]];
 }
 
 - (void) initFileName {
+    Player *player = [Player getInstance];
+
     [fileName setStringValue:[[player url] lastPathComponent]];
 }
 
 - (void) playAt:(NSTimeInterval) offset {
+    Player *player = [Player getInstance];
+
     [player setCurrentTime:([player currentTime] + offset)];
     
     [self updateTime: [player currentTime]];
 }
 
 - (void)updateSlider:(NSTimer*) targetTimer {
+    Player *player = [Player getInstance];
+
     if (player == [timer userInfo] && [player isPlaying]) {
         [self updateTime: [player currentTime]];
     }

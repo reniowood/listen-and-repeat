@@ -10,6 +10,17 @@
 
 @implementation Player
 
++ (Player *) getInstance {
+    static dispatch_once_t pred;
+    static Player *shared = nil;
+    
+    dispatch_once(&pred, ^{
+        shared = [[Player alloc] init];
+    }); // synchronous way to generate a singleton instance.
+    
+    return shared;
+}
+
 - (id) init {
     NSURL *path = [self openFile];
     NSError *error;

@@ -9,11 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import <AVFoundation/AVFoundation.h>
 
-@class Player;
-
 @interface ViewController : NSViewController <AVAudioPlayerDelegate>
 
-@property (nonatomic, retain) Player *player;
 @property (nonatomic, retain) NSTimer *timer;
 
 @property (weak) IBOutlet NSTextField *fileName;
