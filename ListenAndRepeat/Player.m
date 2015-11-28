@@ -10,6 +10,9 @@
 
 @implementation Player
 
+@synthesize duration;
+@synthesize filename;
+
 + (Player *) getInstance {
     static dispatch_once_t pred;
     static Player *shared = nil;
@@ -21,20 +24,43 @@
     return shared;
 }
 
-- (id) init {
-    NSURL *path = [self openFile];
-    NSError *error;
+- (Player *) init {
+    self = [super init];
     
-    self = [super initWithContentsOfURL:path error:&error];
-    
-    if (error) {
-        NSLog(@"%@", [error localizedDescription]);
-    } else {
-        [self prepareToPlay];
-    }
+    [self setDuration:0.0];
+    [self setFilename:@"open a file"];
     
     return self;
 }
+
+- (void) openAudioFile {
+    if ([self.audioPlayer isPlaying]) {
+        [self.audioPlayer stop];
+    }
+    
+    NSURL *path = [self openFile];
+    
+    if (path == nil) {
+        return;
+    }
+    
+    [self initPlayer: path];
+    
+    [self setDuration:[self.audioPlayer duration]];
+    [self setFilename:[[self.audioPlayer url] lastPathComponent]];
+}
+
+- (void) toggle {
+    if ([self.audioPlayer isPlaying]) {
+        [self.audioPlayer pause];
+    } else {
+        [self.audioPlayer play];
+    }
+}
+
+@end
+
+@implementation Player (Private)
 
 - (NSURL *) openFile {
     NSOpenPanel *openFileDialog = [NSOpenPanel openPanel];
@@ -48,6 +74,14 @@
     }
     
     return [[openFileDialog URLs] objectAtIndex:0];
+}
+
+- (void) initPlayer: (NSURL *) path {
+    NSError *error;
+    
+    [self setAudioPlayer: [[AVAudioPlayer alloc] initWithContentsOfURL:path error:&error]];
+    [self.audioPlayer setCurrentTime:0];
+    [self.audioPlayer stop];
 }
 
 @end

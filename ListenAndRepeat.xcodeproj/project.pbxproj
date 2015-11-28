@@ -15,6 +15,7 @@
 		942DBE2C1BF8CA3D00670537 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942DBE2A1BF8CA3D00670537 /* Main.storyboard */; };
 		942DBE371BF8CA3D00670537 /* ListenAndRepeatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE361BF8CA3D00670537 /* ListenAndRepeatTests.m */; };
 		942DBE421BF8CA3D00670537 /* ListenAndRepeatUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE411BF8CA3D00670537 /* ListenAndRepeatUITests.m */; };
+		944E5AB21C097A33004CA29B /* TimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 944E5AB11C097A33004CA29B /* TimeFormatter.m */; };
 		94678A621C00D4BF008F1E3B /* HotKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 94678A611C00D4BF008F1E3B /* HotKey.m */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		942DBE3D1BF8CA3D00670537 /* ListenAndRepeatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListenAndRepeatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		942DBE411BF8CA3D00670537 /* ListenAndRepeatUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListenAndRepeatUITests.m; sourceTree = "<group>"; };
 		942DBE431BF8CA3D00670537 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		944E5AB01C097A33004CA29B /* TimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeFormatter.h; sourceTree = "<group>"; };
+		944E5AB11C097A33004CA29B /* TimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeFormatter.m; sourceTree = "<group>"; };
 		94678A611C00D4BF008F1E3B /* HotKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotKey.m; sourceTree = "<group>"; };
 		94678A631C00D4D5008F1E3B /* HotKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotKey.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +116,8 @@
 				94678A611C00D4BF008F1E3B /* HotKey.m */,
 				1E76D0041C01AC2E007D8265 /* Player.h */,
 				1E76D0051C01AC2E007D8265 /* Player.m */,
+				944E5AB01C097A33004CA29B /* TimeFormatter.h */,
+				944E5AB11C097A33004CA29B /* TimeFormatter.m */,
 				942DBE281BF8CA3D00670537 /* Assets.xcassets */,
 				942DBE2A1BF8CA3D00670537 /* Main.storyboard */,
 				942DBE2D1BF8CA3D00670537 /* Info.plist */,
@@ -284,6 +289,7 @@
 				942DBE211BF8CA3D00670537 /* AppDelegate.m in Sources */,
 				94678A621C00D4BF008F1E3B /* HotKey.m in Sources */,
 				1E76D0061C01AC2E007D8265 /* Player.m in Sources */,
+				944E5AB21C097A33004CA29B /* TimeFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

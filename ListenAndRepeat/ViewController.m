@@ -10,32 +10,21 @@
 #import "AppDelegate.h"
 #import "HotKey.h"
 #import "Player.h"
+#import "TimeFormatter.h"
 
 @implementation ViewController
-
-@synthesize timer;
-
-@synthesize fileName;
-@synthesize currentTime;
-@synthesize duration;
-@synthesize timeSlider;
-
-@synthesize playButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillClose:) name:NSWindowWillCloseNotification object:self.view.window];
-
-    Player *player = [Player getInstance];
-    [player setDelegate:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillClose:) name:NSWindowWillCloseNotification object:nil];
     
-    [self initHotKeys];
-    
-    [self setTimer:nil];
+    [self setPlayer:[Player getInstance]];
+    [self setTimer:[self getScheduledTimerForUpdateView]];
     
     [self initView];
+    [self initHotKeys];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -45,38 +34,17 @@
 }
 
 - (void) windowWillClose:(NSNotification *) notification {
-    Player *player = [Player getInstance];
-
-    [player stop];
-    [timer invalidate];
-}
-
-- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    [timer invalidate];
-    [self setTimer:nil];
+    NSString *closedWindowClassName = NSStringFromClass([notification.object class]);
     
-    [playButton setTitle:@"Play"];
-    
-    [self updateTime: 0.0];
+    if ([closedWindowClassName isEqual: @"NSWindow"]) {
+        [[self.player audioPlayer] stop];
+        [self.timer invalidate];
+    }
 }
 
 - (IBAction)playSound:(NSButton *) sender {
-    Player *player = [Player getInstance];
-
-    if ([player isPlaying] == YES) {
-        [timer invalidate];
-        [self setTimer:nil];
-        
-        [player pause];
-        
-        [playButton setTitle:@"Play"];
-    } else {
-        [self setTimer:[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateSlider:) userInfo:player repeats:YES]];
-        
-        [player play];
-        
-        [playButton setTitle:@"Stop"];
-    }
+    [self.player toggle];
+    [self updatePlayButton:[[self.player audioPlayer] isPlaying]];
 }
 
 - (IBAction)playBackwardOneSec:(NSButton *)sender {
@@ -96,11 +64,10 @@
 }
 
 - (IBAction)setSlider:(NSSlider *)sender {
-    Player *player = [Player getInstance];
     double sliderValue = [sender doubleValue];
     
-    [player setCurrentTime:sliderValue];
-    [currentTime setStringValue:[self getFormattedTime:sliderValue]];
+    [[self.player audioPlayer] setCurrentTime:sliderValue];
+    [self.currentTime setDoubleValue:sliderValue];
 }
 
 @end
@@ -119,49 +86,57 @@
 }
 
 - (void) initSlider {
-    Player *player = [Player getInstance];
-
-    [timeSlider setMinValue:0.0];
-    [timeSlider setMaxValue:[player duration]];
-    [timeSlider setDoubleValue:0];
+    [self.timeSlider setMinValue:0.0];
+    [self.timeSlider setMaxValue:[self.player duration]];
+    [self.timeSlider setDoubleValue:0];
 }
 
 - (void) initTimeText {
-    Player *player = [Player getInstance];
-
-    [currentTime setStringValue:[self getFormattedTime:0]];
-    [duration setStringValue:[self getFormattedTime:[player duration]]];
+    TimeFormatter *timeFormatter = [[TimeFormatter alloc] init];
+    
+    [self.currentTime setFormatter:timeFormatter];
+    [self.duration setFormatter:timeFormatter];
+    
+    [self.currentTime setDoubleValue:0.0];
+    [self.duration setDoubleValue:[self.player duration]];
 }
 
 - (void) initFileName {
-    Player *player = [Player getInstance];
-
-    [fileName setStringValue:[[player url] lastPathComponent]];
+    [self.fileName setStringValue:[self.player filename]];
 }
 
 - (void) playAt:(NSTimeInterval) offset {
-    Player *player = [Player getInstance];
+    AVAudioPlayer *audioPlayer = [self.player audioPlayer];
 
-    [player setCurrentTime:([player currentTime] + offset)];
+    [audioPlayer setCurrentTime:([audioPlayer currentTime] + offset)];
     
-    [self updateTime: [player currentTime]];
+    [self updateTime: [audioPlayer currentTime]];
 }
 
-- (void)updateSlider:(NSTimer*) targetTimer {
-    Player *player = [Player getInstance];
+- (NSTimer *) getScheduledTimerForUpdateView {
+    return [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateView:) userInfo:self.player repeats:YES];
+}
 
-    if (player == [timer userInfo] && [player isPlaying]) {
-        [self updateTime: [player currentTime]];
+- (void)updateView:(NSTimer*) targetTimer {
+    AVAudioPlayer *audioPlayer = [self.player audioPlayer];
+
+    if (self.player == [self.timer userInfo]) {
+        [self updateTime: [audioPlayer currentTime]];
+        [self updatePlayButton: [audioPlayer isPlaying]];
     }
 }
 
 - (void) updateTime: (NSTimeInterval) time {
-    [timeSlider setDoubleValue:time];
-    [currentTime setStringValue:[self getFormattedTime:time]];
+    [self.timeSlider setDoubleValue:time];
+    [self.currentTime setDoubleValue:time];
 }
 
-- (NSString*) getFormattedTime:(int) seconds {
-    return [NSString stringWithFormat:@"%02d:%02d:%02d", seconds / 3600, (seconds / 60) % 60, seconds % 60];
+- (void) updatePlayButton: (BOOL) isPlaying {
+    if (isPlaying) {
+        [self.playButton setTitle:@"Stop"];
+    } else {
+        [self.playButton setTitle:@"Play"];
+    }
 }
 
 @end

@@ -9,8 +9,23 @@
 #import <Cocoa/Cocoa.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface Player : AVAudioPlayer
+@interface Player : NSObject
+
+@property AVAudioPlayer *audioPlayer;
+
+@property NSString *filename;
+@property double duration;
 
 + (Player *) getInstance;
+
+- (void) openAudioFile;
+- (void) toggle;
+
+@end
+
+@interface Player (Private)
+
+- (NSURL *) openFile;
+- (void) initPlayer: (NSURL *) path;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Player.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,12 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+}
+
+- (IBAction)openFile:(id)sender {
+    Player *player = [Player getInstance];
+    
+    [player openAudioFile];
 }
 
 @end

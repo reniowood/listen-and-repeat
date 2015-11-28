@@ -9,9 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface ViewController : NSViewController <AVAudioPlayerDelegate>
+@class Player;
 
-@property (nonatomic, retain) NSTimer *timer;
+@interface ViewController : NSViewController
+
+@property Player *player;
+
+@property NSTimer *timer;
 
 @property (weak) IBOutlet NSTextField *fileName;
 @property (weak) IBOutlet NSTextField *currentTime;
@@ -42,10 +46,10 @@
 - (void) initFileName;
 
 - (void) playAt: (NSTimeInterval) offset;
-- (void) updateSlider:(NSTimer*) targetTimer;
+- (NSTimer *) getScheduledTimerForUpdateView;
+- (void) updateView:(NSTimer*) targetTimer;
 - (void) updateTime: (NSTimeInterval) time;
-
-- (NSString*) getFormattedTime:(int) seconds;
+- (void) updatePlayButton: (BOOL) isPlaying;
 
 @end
 
