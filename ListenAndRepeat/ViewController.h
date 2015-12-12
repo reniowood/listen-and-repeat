@@ -28,12 +28,22 @@
 @property (weak) IBOutlet NSButton *playForwardOneSecButton;
 @property (weak) IBOutlet NSButton *playForwardThreeSecButton;
 
-- (IBAction)playSound:(NSButton*) sender;
+@property (weak) IBOutlet NSButton *toggleVolume;
+@property (weak) IBOutlet NSSlider *volumeSlider;
+
+- (IBAction)slideTimeSlider:(NSSlider *)sender;
+
+- (IBAction)togglePlayer:(NSButton*) sender;
 - (IBAction)playBackwardOneSec:(NSButton *)sender;
 - (IBAction)playBackwardThreeSec:(NSButton *)sender;
 - (IBAction)playForwardOneSec:(NSButton *)sender;
 - (IBAction)playForwardThreeSec:(NSButton *)sender;
-- (IBAction)setSlider:(NSSlider *)sender;
+
+- (IBAction)toggleVolume:(NSButton *)sender;
+- (IBAction)slideVolumeSlider:(NSSlider *)sender;
+
+- (void) volumeUp;
+- (void) volumeDown;
 
 @end
 
@@ -41,15 +51,17 @@
 
 - (void) initHotKeys;
 - (void) initView;
-- (void) initSlider;
+- (void) initTimeSlider;
 - (void) initTimeText;
 - (void) initFileName;
+- (void) initVolumeSlider;
 
 - (void) playAt: (NSTimeInterval) offset;
 - (NSTimer *) getScheduledTimerForUpdateView;
 - (void) updateView:(NSTimer*) targetTimer;
 - (void) updateTime: (NSTimeInterval) time;
 - (void) updatePlayButton: (BOOL) isPlaying;
+- (void) toggleVolumeButtonImg;
 
 @end
 

@@ -60,6 +60,14 @@
     }
 }
 
+- (float) getVolume {
+    return [self.audioPlayer volume];
+}
+
+- (void) setVolume: (float) volume {
+    [self.audioPlayer setVolume:volume];
+}
+
 @end
 
 @implementation Player (Private)
@@ -83,6 +91,7 @@
     
     [self setAudioPlayer: [[AVAudioPlayer alloc] initWithContentsOfURL:path error:&error]];
     [self.audioPlayer setCurrentTime:0];
+    [self.audioPlayer setVolume:0.5];
     [self.audioPlayer stop];
 }
 

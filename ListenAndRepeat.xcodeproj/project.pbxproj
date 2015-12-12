@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1E76D0061C01AC2E007D8265 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76D0051C01AC2E007D8265 /* Player.m */; };
+		9412BCDF1C1C466600FDD9AD /* sound_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9412BCDE1C1C466600FDD9AD /* sound_on.png */; };
+		9412BCE11C1C46E200FDD9AD /* sound_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9412BCE01C1C46E200FDD9AD /* sound_off.png */; };
 		942DBE211BF8CA3D00670537 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE201BF8CA3D00670537 /* AppDelegate.m */; };
 		942DBE241BF8CA3D00670537 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE231BF8CA3D00670537 /* main.m */; };
 		942DBE271BF8CA3D00670537 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942DBE261BF8CA3D00670537 /* ViewController.m */; };
@@ -39,6 +41,8 @@
 /* Begin PBXFileReference section */
 		1E76D0041C01AC2E007D8265 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		1E76D0051C01AC2E007D8265 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		9412BCDE1C1C466600FDD9AD /* sound_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sound_on.png; path = ../../../Downloads/sound_on.png; sourceTree = "<group>"; };
+		9412BCE01C1C46E200FDD9AD /* sound_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sound_off.png; path = ../../../Downloads/sound_off.png; sourceTree = "<group>"; };
 		942DBE1C1BF8CA3D00670537 /* ListenAndRepeat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListenAndRepeat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		942DBE1F1BF8CA3D00670537 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		942DBE201BF8CA3D00670537 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 		942DBE221BF8CA3D00670537 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9412BCE01C1C46E200FDD9AD /* sound_off.png */,
+				9412BCDE1C1C466600FDD9AD /* sound_on.png */,
 				942DBE231BF8CA3D00670537 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -258,6 +264,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9412BCDF1C1C466600FDD9AD /* sound_on.png in Resources */,
+				9412BCE11C1C46E200FDD9AD /* sound_off.png in Resources */,
 				942DBE291BF8CA3D00670537 /* Assets.xcassets in Resources */,
 				942DBE2C1BF8CA3D00670537 /* Main.storyboard in Resources */,
 			);

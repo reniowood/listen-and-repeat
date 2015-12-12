@@ -44,7 +44,14 @@
     }
 }
 
-- (IBAction)playSound:(NSButton *) sender {
+- (IBAction)slideTimeSlider:(NSSlider *)sender {
+    double sliderValue = [sender doubleValue];
+    
+    [[self.player audioPlayer] setCurrentTime:sliderValue];
+    [self.currentTime setDoubleValue:sliderValue];
+}
+
+- (IBAction)togglePlayer:(NSButton *) sender {
     [self.player toggle];
     [self updatePlayButton:[[self.player audioPlayer] isPlaying]];
 }
@@ -65,11 +72,42 @@
     [self playAt: 3.0];
 }
 
-- (IBAction)setSlider:(NSSlider *)sender {
-    double sliderValue = [sender doubleValue];
+- (IBAction)toggleVolume:(NSButton *)sender {
+    if ([self.player getVolume] <= 0.0) {
+        [self.player setVolume: [self.volumeSlider floatValue]];
+        [self.toggleVolume setImage:[NSImage imageNamed:@"sound_on.png"]];
+    } else {
+        [self.player setVolume: 0.0];
+        [self.toggleVolume setImage:[NSImage imageNamed:@"sound_off.png"]];
+    }
+}
+
+- (IBAction)slideVolumeSlider:(NSSlider *)sender {
+    [self.player setVolume: [self.volumeSlider floatValue]];
     
-    [[self.player audioPlayer] setCurrentTime:sliderValue];
-    [self.currentTime setDoubleValue:sliderValue];
+    [self toggleVolumeButtonImg];
+}
+
+- (void) volumeUp {
+    float playerVolume = [self.player getVolume];
+    
+    if (playerVolume < 1) {
+        [self.player setVolume: playerVolume + 0.1];
+        
+        [self.volumeSlider setFloatValue:playerVolume + 0.1];
+        [self toggleVolumeButtonImg];
+    }
+}
+
+- (void) volumeDown {
+    float playerVolume = [self.player getVolume];
+    
+    if (playerVolume > 0) {
+        [self.player setVolume: playerVolume - 0.1];
+        
+        [self.volumeSlider setFloatValue:playerVolume - 0.1];
+        [self toggleVolumeButtonImg];
+    }
 }
 
 @end
@@ -83,11 +121,16 @@
 
 - (void) initView {
     [self initFileName];
-    [self initSlider];
+    [self initTimeSlider];
     [self initTimeText];
+    [self initVolumeSlider];
 }
 
-- (void) initSlider {
+- (void) initFileName {
+    [self.fileName setStringValue:[self.player filename]];
+}
+
+- (void) initTimeSlider {
     [self.timeSlider setMinValue:0.0];
     [self.timeSlider setMaxValue:[self.player duration]];
     [self.timeSlider setDoubleValue:0];
@@ -103,8 +146,10 @@
     [self.duration setDoubleValue:[self.player duration]];
 }
 
-- (void) initFileName {
-    [self.fileName setStringValue:[self.player filename]];
+- (void) initVolumeSlider {
+    [self.volumeSlider setMinValue:0.0];
+    [self.volumeSlider setMaxValue:1.0];
+    [self.volumeSlider setFloatValue:[self.player getVolume]];
 }
 
 - (void) playAt:(NSTimeInterval) offset {
@@ -138,6 +183,14 @@
         [self.playButton setTitle:@"Stop"];
     } else {
         [self.playButton setTitle:@"Play"];
+    }
+}
+
+- (void) toggleVolumeButtonImg {
+    if ([self.player getVolume] <= 0.0) {
+        [self.toggleVolume setImage:[NSImage imageNamed:@"sound_off.png"]];
+    } else {
+        [self.toggleVolume setImage:[NSImage imageNamed:@"sound_on.png"]];
     }
 }
 

@@ -216,12 +216,9 @@
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a8T-in-hWB">
                                 <rect key="frame" x="33" y="149" width="414" height="21"/>
                                 <animations/>
-                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="HzI-DO-VT4">
-                                    <connections>
-                                        <action selector="setSlider:" target="XfG-lQ-9wD" id="Yk3-9g-TXT"/>
-                                    </connections>
-                                </sliderCell>
+                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="HzI-DO-VT4"/>
                                 <connections>
+                                    <action selector="slideTimeSlider:" target="XfG-lQ-9wD" id="WUe-lS-Oec"/>
                                     <binding destination="XfG-lQ-9wD" name="maxValue" keyPath="self.player.duration" id="2Fh-cn-aBb"/>
                                 </connections>
                             </slider>
@@ -229,11 +226,6 @@
                                 <rect key="frame" x="427" y="17" width="21" height="96"/>
                                 <animations/>
                                 <sliderCell key="cell" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="HNo-2N-Acm"/>
-                            </slider>
-                            <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Db8-Vc-naj">
-                                <rect key="frame" x="33" y="17" width="21" height="96"/>
-                                <animations/>
-                                <sliderCell key="cell" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="j3L-gR-A3s"/>
                             </slider>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Klk-ru-pOB">
                                 <rect key="frame" x="33" y="118" width="142" height="27"/>
@@ -264,7 +256,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="playSound:" target="XfG-lQ-9wD" id="fwG-Rd-VuR"/>
+                                    <action selector="togglePlayer:" target="XfG-lQ-9wD" id="6v7-MX-IuY"/>
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kBN-OZ-bgb">
@@ -294,6 +286,25 @@
                                     </binding>
                                 </connections>
                             </textField>
+                            <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Db8-Vc-naj">
+                                <rect key="frame" x="33" y="17" width="21" height="96"/>
+                                <animations/>
+                                <sliderCell key="cell" continuous="YES" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="j3L-gR-A3s"/>
+                                <connections>
+                                    <action selector="slideVolumeSlider:" target="XfG-lQ-9wD" id="1ut-ec-d12"/>
+                                </connections>
+                            </slider>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Be6-GK-A4l">
+                                <rect key="frame" x="60" y="57" width="16" height="16"/>
+                                <animations/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="sound_on" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="j7z-KY-2Ib">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="toggleVolume:" target="XfG-lQ-9wD" id="fgA-fp-sOC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                     </view>
@@ -307,6 +318,8 @@
                         <outlet property="playForwardOneSecButton" destination="kBN-OZ-bgb" id="o2Z-KG-MvX"/>
                         <outlet property="playForwardThreeSecButton" destination="jMl-a4-LoA" id="A7w-dj-GgP"/>
                         <outlet property="timeSlider" destination="a8T-in-hWB" id="fLp-S5-a25"/>
+                        <outlet property="toggleVolume" destination="Be6-GK-A4l" id="4WB-ei-BTU"/>
+                        <outlet property="volumeSlider" destination="Db8-Vc-naj" id="rai-xH-UrQ"/>
                     </connections>
                 </viewController>
                 <userDefaultsController representsSharedInstance="YES" id="g2U-G4-XFD"/>
@@ -314,4 +327,7 @@
             <point key="canvasLocation" x="75" y="630.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="sound_on" width="74.322578430175781" height="74.322578430175781"/>
+    </resources>
 </document>

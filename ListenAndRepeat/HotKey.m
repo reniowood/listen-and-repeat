@@ -41,6 +41,14 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef eventRef, void 
     eventHotKeyID.signature = 'lra3';
     eventHotKeyID.id = 5;
     RegisterEventHotKey(kVK_ANSI_V, optionKey, eventHotKeyID, GetApplicationEventTarget(), 0, &eventHotKeyRef);
+    
+    eventHotKeyID.signature = 'lrvu';
+    eventHotKeyID.id = 6;
+    RegisterEventHotKey(kVK_UpArrow, optionKey, eventHotKeyID, GetApplicationEventTarget(), 0, &eventHotKeyRef);
+    
+    eventHotKeyID.signature = 'lrvd';
+    eventHotKeyID.id = 7;
+    RegisterEventHotKey(kVK_DownArrow, optionKey, eventHotKeyID, GetApplicationEventTarget(), 0, &eventHotKeyRef);
 }
 
 @end
@@ -53,7 +61,7 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef eventRef, void 
     
     switch (eventHotKeyID.id) {
         case 1:
-            [viewController playSound:nil];
+            [viewController togglePlayer:nil];
             
             break;
         case 2:
@@ -70,6 +78,14 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef eventRef, void 
             break;
         case 5:
             [viewController playForwardThreeSec:nil];
+            
+            break;
+        case 6:
+            [viewController volumeUp];
+            
+            break;
+        case 7:
+            [viewController volumeDown];
             
             break;
         default:

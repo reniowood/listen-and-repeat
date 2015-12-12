@@ -20,6 +20,8 @@
 
 - (void) openAudioFile;
 - (void) toggle;
+- (float) getVolume;
+- (void) setVolume: (float) volume;
 
 @end
 
