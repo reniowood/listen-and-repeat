@@ -23,6 +23,8 @@
     [self setPlayer:[Player getInstance]];
     [self setTimer:[self getScheduledTimerForUpdateView]];
     
+    [self.player openAudioFile];
+    
     [self initView];
     [self initHotKeys];
 }
