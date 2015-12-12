@@ -48,6 +48,8 @@
     
     [self setDuration:[self.audioPlayer duration]];
     [self setFilename:[[self.audioPlayer url] lastPathComponent]];
+    
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (void) toggle {
